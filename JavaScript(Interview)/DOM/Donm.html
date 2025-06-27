@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excercise</title>
+</head>
+
+<body>
+    <h2>Actions</h2>
+
+    <button id="show-a-meme">Show a Meme</button><br><br><br>
+    <button id="tell-me-a-joke">Tell Me a Joke</button><br><br><br>
+    <button id="random-quote">Random Quote</button><br><br><br>
+    <button id="riddle-me">Riddle me Quote</button><br><br><br>
+    <button id="riddle-me-answer">Riddle me Answer</button>
+
+    <div class="memory-evolution"></div>
+    <div class="tell-me-a-joke"></div>
+    <div class="random-quote"></div>
+    <div class="riddle-me"></div>
+    <div class="revel-riddle-answers"></div>
+
+
+
+    <script>
+        const randomQuotes = [
+            "Code is like humor. When you have to explain it, it’s bad. – Cory House",
+            "Talk is cheap. Show me the code. – Linus Torvalds",
+            "The best way to predict the future is to invent it. – Alan Kay",
+            "Programs must be written for people to read, and only incidentally for machines to execute. – Harold Abelson",
+            "Experience is the name everyone gives to their mistakes. – Oscar Wilde",
+            "If at first, you don’t succeed, call it version 1.0. – Unknown",
+            "The function of good software is to make the complex appear to be simple. – Grady Booch",
+            "First, solve the problem. Then, write the code. – John Johnson",
+            "Software and cathedrals are much the same – first we build them, then we pray. – Anonymous",
+            "I have not failed. I’ve just found 10,000 ways that won’t work. – Thomas Edison"
+        ];
+        const riddles = [
+                { "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind.": "An echo" },
+                { "The more of me you take, the more you leave behind.": "Footsteps" },
+                { "I have keys but open no locks. I have space but no room. You can enter but not leave.": "A keyboard" },
+                { "The more you use me, the smaller I get.": "A pencil" },
+                { "I have cities but no houses, mountains but no trees, and water but no fish.": "A map" },
+                { "What has to be broken before you can use it?": "An egg" },
+                { "I am always running but never move.": "A clock" },
+                { "What has an eye but cannot see?": "A needle" },
+                { "What has a heart that doesn’t beat?": "An artichoke" }
+            ];
+            let currentRiddle = {};
+        document.querySelector("#show-a-meme").addEventListener("click", function () {
+
+            // Clear the previous image if it exists
+            const memeContainer = document.querySelector(".memory-evolution");
+            memeContainer.innerHTML = "";
+
+            const randomNum = Math.floor(Math.random() * 4);
+            const imgElement = document.createElement('img');
+            const imgElementSrc = "./images/img" + randomNum + ".jpg";
+            const imgAltAttr = "Memory Storage Evolutions";
+
+            const h2Element = document.createElement('h2');
+            h2Element.textContent = "Output";
+            const pElement = document.createElement('p');
+            pElement.textContent = "Programming Meme";
+
+            document.querySelector(".memory-evolution").appendChild(h2Element);
+            document.querySelector(".memory-evolution").appendChild(pElement);
+            imgElement.setAttribute("src", imgElementSrc);
+            imgElement.setAttribute("alt", imgAltAttr);
+            document.querySelector(".memory-evolution").appendChild(imgElement);
+
+        })
+
+        document.querySelector("#tell-me-a-joke").addEventListener("click", function () {
+
+            const parElement = document.createElement('p');
+            const paraElement = document.createElement('p');
+            paraElement.textContent = "Tell me something funny!";
+            parElement.textContent = "Why do programmers prefer dark mode?Because light attracts bugs!😆💻"
+            document.querySelector(".tell-me-a-joke").appendChild(paraElement);
+            document.querySelector(".tell-me-a-joke").appendChild(parElement);
+        })
+
+        document.querySelector("#random-quote").addEventListener("click", function () {
+
+            const randomQuote = document.querySelector(".random-quote");
+            randomQuote.innerHTML = "";
+            const lenQuoteArray = randomQuotes.length - 1;
+            const randomNum = Math.floor(Math.random() * lenQuoteArray);
+            const para = document.createElement("p");
+            para.textContent = "Give me some wisdom...";
+            const quoteParagraph = document.createElement("p");
+            quoteParagraph.textContent = randomQuotes[ randomNum ];
+            document.querySelector(".random-quote").appendChild(para);
+            document.querySelector(".random-quote").appendChild(quoteParagraph);
+        })
+
+        document.querySelector("#riddle-me").addEventListener("click", function () {
+            const riddleContainer = document.querySelector(".riddle-me");
+            riddleContainer.innerHTML = "";
+            const randomIndex = Math.floor(Math.random() * riddles.length);
+            currentRiddle = riddles[randomIndex];
+            const question = Object.keys(currentRiddle)[0];
+            const paragraph = document.createElement('p');
+            paragraph.textContent = "Riddle me this...";
+            const riddleQuestion = document.createElement('p');
+            riddleQuestion.textContent = question;
+            riddleContainer.appendChild(paragraph);
+            riddleContainer.appendChild(riddleQuestion);
+
+        })
+
+        document.querySelector("#riddle-me-answer").addEventListener("click", function () {
+            const riddleContainer = document.querySelector(".revel-riddle-answers");
+            riddleContainer.innerHTML = "";
+            const answer = Object.values(currentRiddle)[0];
+            const paragraph = document.createElement('p');
+            paragraph.textContent = "The answer is...";
+            const riddleAnswer = document.createElement('p');
+            riddleAnswer.textContent = answer;
+            riddleContainer.appendChild(paragraph);
+            riddleContainer.appendChild(riddleAnswer);
+        })
+
+    </script>
+</body>
+
+</html>
